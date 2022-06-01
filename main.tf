@@ -1,21 +1,22 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
-      version = "4.16.0"
+      source  = "hashicorp/aws"
+      version = "3.74.0"
     }
   }
 }
 
 provider "aws" {
-  # Configuration options
+  region  = "${var.aws_region}"
+  profile = "${var.aws_profile}"
 }
 
-resource "aws_vpc" "jenkins" {
+resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
 
   tags = {
-    Name = "jenkins"
+    Name = "main"
   }
 }
