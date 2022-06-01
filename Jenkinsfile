@@ -1,21 +1,30 @@
 pipeline {
     agent any
-
+    tools {
+       terraform 'terraform'
+    }
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
+        stage('Git checkout') {
+            steps{
+                git 'https://github.com/dinushchathurya/jenkins-terraform.git'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+        stage('terraform format check') {
+            steps{
+                sh 'terraform fmt'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('terraform Init') {
+            steps{
+                sh 'terraform init'
+            }
+        }
+        stage('terraform apply') {
+            steps{
+                sh 'terraform apply --auto-approve'
             }
         }
     }
+
+    
 }
