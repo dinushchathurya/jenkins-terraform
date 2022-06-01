@@ -8,8 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = "${var.aws_region}"
-  profile = "${var.aws_profile}"
+  # Configuration options
 }
 
 resource "aws_vpc" "jenkins" {
