@@ -13,15 +13,8 @@ provider "aws" {
 	region     = var.aws_region
 }
 
-resource "aws_vpc" "vpc" {
-    cidr_block           = "10.0.0.0/16"
-    enable_dns_support   = "true"
-    enable_dns_hostnames = "true"
-    enable_classiclink   = "false"
-    instance_tenancy     = "default"
-
-    tags = {
-        Name = "vpc"
-    }
+resource "aws_instance" "example" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.micro"
 }
 
