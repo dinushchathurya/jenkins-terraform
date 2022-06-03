@@ -33,6 +33,9 @@
 
 pipeline {
     agent any
+    tools {
+       terraform 'terraform'
+    }
     stages {
         stage('Git checkout') {
             steps{
@@ -49,7 +52,12 @@ pipeline {
                 sh 'terraform init'
             }
         }
-        stage('test AWS credentials') {
+        stage('terraform Plan') {
+            steps{
+                sh 'terraform plan'
+            }
+        }
+        stage('terraform Apply') {
             steps {
                 withAWS(credentials: 'Terraform', region: 'ap-southeast-1') {
                     sh 'terraform apply --auto-approve'
