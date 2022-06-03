@@ -20,8 +20,10 @@ pipeline {
             }
         }
         stage('terraform apply') {
-            steps{
-                sh 'terraform apply --auto-approve'
+            steps {
+                withAWS(credentials: 'jenkins-test-user', region: 'ap-southeast-1') {
+                   sh 'terraform apply --auto-approve'
+                }
             }
         }
     }
