@@ -37,27 +37,27 @@ pipeline {
        terraform 'terraform'
     }
     stages {
-        stage('Git checkout') {
+        stage('Git Checkout') {
             steps{
                 git 'https://github.com/dinushchathurya/jenkins-terraform.git'
             }
         }
-        stage('terraform format check') {
+        stage('Terraform Format') {
             steps{
                 sh 'terraform fmt'
             }
         }
-        stage('terraform Init') {
+        stage('Terraform Init') {
             steps{
                 sh 'terraform init'
             }
         }
-        stage('terraform Plan') {
+        stage('Terraform Plan') {
             steps{
                 sh 'terraform plan'
             }
         }
-        stage('terraform Apply') {
+        stage('Terraform Apply') {
             steps {
                 withAWS(credentials: 'Terraform', region: 'ap-southeast-1') {
                     sh 'terraform apply --auto-approve'
