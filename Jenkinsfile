@@ -36,7 +36,7 @@ pipeline {
     stages {
         stage('test AWS credentials') {
             steps {
-                withAWS(credentials: 'jenkins-test-user', region: 'ap-southeast-1') {
+                withAWS(credentials: 'Terraform', region: 'ap-southeast-1') {
                     sh 'echo "hello Jenkins">hello.txt'
                     s3Upload acl: 'Private', bucket: 'devopslee', file: 'hello.txt'
                     s3Download bucket: 'devopslee', file: 'downloadedHello.txt', path: 'hello.txt'
