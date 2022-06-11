@@ -19,11 +19,6 @@ pipeline {
                 sh 'terraform init'
             }
         }
-        // stage('Terraform Plan') {
-        //     steps{
-        //         sh 'terraform plan'
-        //     }
-        // }
         stage('Terraform Apply') {
             steps {
                 withAWS(credentials: 'terraform', region: 'ap-southeast-1') {
